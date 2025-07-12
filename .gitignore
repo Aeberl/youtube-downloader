@@ -18,3 +18,4 @@ frontend/build/
 # Environment files
 .env
 
+!frontend/.env.production
