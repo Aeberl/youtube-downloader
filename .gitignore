@@ -1,0 +1,20 @@
+# Python
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+*.sqlite3
+*.log
+db.sqlite3
+
+# Node/React
+frontend/node_modules/
+frontend/.env*
+frontend/build/
+
+# Environment files
+.env
+
