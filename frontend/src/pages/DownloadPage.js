@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import DownloadForm from '../components/DownloadForm';
 import { useNavigate } from 'react-router-dom';
-import Ad from '../components/Ad';
+// import Ad from '../components/Ad';
 
 function DownloadPage() {
   const [videoInfo, setVideoInfo] = useState(null);

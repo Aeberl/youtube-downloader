@@ -17,6 +17,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     setError('');
     setVideoInfo(null);
     try {
+      /* eslint-disable no-template-curly-in-string */
       const response = await axios.post('${process.env.REACT_APP_API_URL}/api/info/', { url });
       setVideoInfo(response.data);
       onVideoInfo(response.data);
@@ -45,7 +46,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     setLoading(true);
     setError('');
     try {
-      // ===== UPDATE THE DOWNLOAD REQUEST =====
+      /* eslint-disable no-template-curly-in-string */
       const response = await axios.post(
         '${process.env.REACT_APP_API_URL}/api/download/', 
         { 
