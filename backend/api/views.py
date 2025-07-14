@@ -8,6 +8,7 @@ import re, os, tempfile, shutil, traceback
 import subprocess
 from django.conf import settings
 from ffmpeg import input as ff_input, output as ff_output
+from urllib.parse import urlparse, parse_qs
 import pysrt
 from django.http import FileResponse
 import traceback
@@ -127,11 +128,24 @@ class VideoInfoView(APIView):
         if not url:
             return Response({'error': 'URL is required'}, status=status.HTTP_400_BAD_REQUEST)
         
+        parsed = urlparse(url)
+        if 'youtube.com' in parsed.netloc:
+            video_id = parse_qs(parsed.query).get('v', [''])[0]
+            if video_id:
+                url = f'https://www.youtube.com/watch?v={video_id}'
+        
+        print(f"Processing URL: {url}")  # For debugging
+        
         ydl_opts = {
-            'noplaylist': True,
-            'skip_download': True,
-            'quiet': True,
-        }
+        'noplaylist': True,
+        'skip_download': True,
+        'quiet': True,
+        'verbose': True,  # For debugging
+        'http_headers': {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9',
+    }
+}
 
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:

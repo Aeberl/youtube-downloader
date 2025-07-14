@@ -13,6 +13,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
   const [audioOnly, setAudioOnly] = useState(false);
 
   const fetchVideoInfo = async () => {
+    const cleanedUrl = cleanYouTubeUrl(url);
     console.log("API URL:", process.env.REACT_APP_API_URL);
     setLoading(true);
     setError('');
@@ -20,7 +21,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     try {
       console.log("Full API Endpoint:", process.env.REACT_APP_API_URL + '/api/info/');
       
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/info/`, { url });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/info/`, { url: cleanedUrl });
       setVideoInfo(response.data);
       onVideoInfo(response.data);
       
@@ -86,6 +87,22 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
+  // Clean YouTube URL
+  const cleanYouTubeUrl = (url) => {
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname.includes('youtube.com')) {
+        const videoId = parsed.searchParams.get('v');
+        if (videoId) {
+          return `https://www.youtube.com/watch?v=${videoId}`;
+        }
+      }
+      return url;
+    } catch (e) {
+      return url;
+    }
   };
 
   return (
