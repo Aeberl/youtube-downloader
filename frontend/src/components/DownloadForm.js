@@ -13,12 +13,14 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
   const [audioOnly, setAudioOnly] = useState(false);
 
   const fetchVideoInfo = async () => {
+    console.log("API URL:", process.env.REACT_APP_API_URL);
     setLoading(true);
     setError('');
     setVideoInfo(null);
     try {
-      /* eslint-disable no-template-curly-in-string */
-      const response = await axios.post('${process.env.REACT_APP_API_URL}/api/info/', { url });
+      console.log("Full API Endpoint:", process.env.REACT_APP_API_URL + '/api/info/');
+      
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/info/`, { url });
       setVideoInfo(response.data);
       onVideoInfo(response.data);
       
@@ -46,9 +48,9 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     setLoading(true);
     setError('');
     try {
-      /* eslint-disable no-template-curly-in-string */
+     
       const response = await axios.post(
-        '${process.env.REACT_APP_API_URL}/api/download/', 
+        `${process.env.REACT_APP_API_URL}/api/download/`, 
         { 
           url, 
           format_id: selectedFormat,

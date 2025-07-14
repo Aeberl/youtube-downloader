@@ -81,7 +81,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-key-for-dev-only')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']  # Allow all hosts for now
+ALLOWED_HOSTS = [
+    'localhost',
+    'https://youtube-downloader-6tov.onrender.com',
+    '127.0.0.1',
+]  # Allow all hosts for now
 
 
 # Application definition
@@ -111,7 +115,21 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # React frontend
+    "https://youtube-downloader-1-p21f.onrender.com"  # Render.com frontend
 ]
+
+# Add this to allow POST requests
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True  # Temporary for debugging!
 
 ROOT_URLCONF = 'youtube_downloader.urls'
 

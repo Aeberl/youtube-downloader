@@ -151,8 +151,8 @@ const VideoEditor = ({ videoBlob, videoTitle, onSave }) => {
       fd.append('start', trimStart.toFixed(2));
       fd.append('end', trimEnd.toFixed(2));
 
-      /* eslint-disable no-template-curly-in-string */
-      const res = await axios.post('${process.env.REACT_APP_API_URL}/api/trim/', fd, {
+      
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/trim/`, fd, {
         responseType: 'blob',
         onUploadProgress: e => setProgress(Math.round(e.loaded * 100 / e.total)),
       });
@@ -274,8 +274,8 @@ const VideoEditor = ({ videoBlob, videoTitle, onSave }) => {
       fd.append('video', new File([currentVideoBlob], `${videoTitle}.mp4`));
       fd.append('captions', srt);
       
-      /* eslint-disable no-template-curly-in-string */
-      const res = await axios.post('${process.env.REACT_APP_API_URL}/api/caption/', fd, {
+      
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/caption/`, fd, {
         responseType: 'blob',
         onUploadProgress: e => setProgress(Math.round(e.loaded * 100 / e.total)),
       });
@@ -321,8 +321,8 @@ const VideoEditor = ({ videoBlob, videoTitle, onSave }) => {
       fd.append('start', trimStart.toFixed(2));
       fd.append('end', trimEnd.toFixed(2));
       
-      /* eslint-disable no-template-curly-in-string */
-      const res = await axios.post('${process.env.REACT_APP_API_URL}/api/combined/', fd, {
+      
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/combined/`, fd, {
         responseType: 'blob',
         onUploadProgress: e => setProgress(Math.round(e.loaded * 100 / e.total)),
       });
