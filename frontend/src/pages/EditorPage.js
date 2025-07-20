@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import VideoEditor from '../components/VideoEditor';
 import { Button } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa'; // Using FontAwesome instead
-import Ad from '../components/Ad';
+// import Ad from '../components/Ad';
 
 function EditorPage() {
   const location = useLocation();

@@ -17,7 +17,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     setError('');
     setVideoInfo(null);
     try {
-      const response = await axios.post('${process.env.REACT_APP_API_URL}/api/info/', { url });
+      const response = await axios.post('/api/info/', { url });
       setVideoInfo(response.data);
       onVideoInfo(response.data);
       
@@ -47,7 +47,7 @@ const DownloadForm = ({ onVideoInfo, onDownloadSuccess }) => {
     try {
       // ===== UPDATE THE DOWNLOAD REQUEST =====
       const response = await axios.post(
-        '${process.env.REACT_APP_API_URL}/api/download/', 
+        '/api/download/', 
         { 
           url, 
           format_id: selectedFormat,
